@@ -1,0 +1,26 @@
+# Ignore bundler config
+/.bundle
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+
+# folder with coverage files by gem simplecov
+/coverage/*
+
+# bin folder
+/bin/*
+
+# Other
+#------------------------------------
+.rvmrc
+.railsrc
+.sass-cache
+*.DS_Store
+/public/cache/*
+/public/system/*
+/dev/*
+/.powder
