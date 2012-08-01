@@ -147,7 +147,7 @@ header h1 { margin-left: 56px; height: 48px; line-height: 48px; font-size: 48px;
   width: 100%;
   height: 100%;
   background: url(overlay-back.png) repeat left top;
-  z-index: 998;
+  z-index: 997;
 }
 
 #cntfrm {
@@ -156,7 +156,7 @@ header h1 { margin-left: 56px; height: 48px; line-height: 48px; font-size: 48px;
   top: 12%;
   left: 0;
   width: 100%;
-  z-index: 999;
+  z-index: 998;
 }
 #cntfrm .wrapper { overflow: hidden; margin: auto; padding: 24px; width: 466px; background: #fff; }
 #cntfrm .title { margin-bottom: 12px; padding: 4px 14px 8px; background: #693E05; font-size: 18px; font-weight: bold; color: #fff; }
@@ -164,7 +164,9 @@ header h1 { margin-left: 56px; height: 48px; line-height: 48px; font-size: 48px;
 #cntfrm .name input { width: 214px; height: 22px; font-size: 18px; font-weight: bold; }
 #cntfrm .numbers { margin-left: 236px; }
 #cntfrm .numbers li { margin-bottom: 8px; padding-left: 18px; background: url('telephone.png') no-repeat left 3px; }
-#cntfrm .numbers input { width: 206px; height: 18px; font-size: 14px; }
+#cntfrm .numbers input { width: 184px; height: 18px; font-size: 14px; }
+#cntfrm .numbers .rem_phone { display: inline-block; margin-left: 2px; width: 14px; height: 14px; background: url(fast_btns.png) no-repeat -14px top; }
+#cntfrm .numbers .rem_phone:hover { background-position: -14px -14px; }
 #cntfrm a.addnumber { margin-left: 254px; }
 #cntfrm .buttons { overflow: hidden; margin-top: 28px; }
 #cntfrm .buttons .the-btn { float: left; margin-right: 8px; padding: 0 12px; width: auto; height: 36px; line-height: 36px; font-size: 16px; cursor: pointer; }
@@ -177,7 +179,7 @@ header h1 { margin-left: 56px; height: 48px; line-height: 48px; font-size: 48px;
   position: fixed;
   top: 18px;
   right: 42px;
-  z-index: 997;
+  z-index: 999;
   padding: 12px 18px;
   max-width: 242px;
   background: #000;
@@ -188,11 +190,3 @@ header h1 { margin-left: 56px; height: 48px; line-height: 48px; font-size: 48px;
   opacity: 0.5;
   color: #fff;
 }
-
-
-
-
-
-
-
-

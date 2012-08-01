@@ -24,7 +24,7 @@
       - current_letter = pl[:name][0].upcase
       %li.letter
         %a{name:'start_of_' + current_letter}= current_letter
-    %li
+    %li{id: 'contact_' + pl[:id].to_s}
       %p.ident= pl[:id]
       %p.name= pl[:name]
       %ol.numbers

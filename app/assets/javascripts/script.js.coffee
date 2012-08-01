@@ -14,6 +14,8 @@ InfoshkaManager = () ->
 
 infoshka_manager = new InfoshkaManager()
 
+# !!! security questions
+
 # ====================================== #
 # ====================================== #
 
@@ -85,10 +87,10 @@ ContactFormManager = () ->
       data: s_data
       error: (jqXHR, textStatus, errorThrown) ->
       success: (data, textStatus, jqXHR) ->
-        # !!! load to list
-        #location.reload()
+        # !!! try to update contact data without reload page
+        location.reload()
         # ---
-        infoshka_manager.show "You sucessfully save contact"
+        infoshka_manager.show "You sucessfully save contact \"" + s_data.contact.name + "\""
         close()
 
 
@@ -100,8 +102,36 @@ ContactFormManager = () ->
     phone_id_text = '<input id="contact_phones_attributes_ORDERIDENT_id" name="contact[phones_attributes][ORDERIDENT][id]" type="hidden" value="' + phone_id + '">' if phone_id
     number_value_text = ''
     number_value_text = ' value="' + number_value + '"' if number_value
-    code_string = '<li><input id="contact_phones_attributes_ORDERIDENT_number" name="contact[phones_attributes][ORDERIDENT][number]" placeholder="Enter phone number" type="text"' + number_value_text + '>' + phone_id_text + '</li>'
+    code_string = '<li><input id="contact_phones_attributes_ORDERIDENT_number" name="contact[phones_attributes][ORDERIDENT][number]" placeholder="Enter phone number" type="text"' + number_value_text + '><a class="rem_phone" href="#" title="Remove phone number"></a>' + phone_id_text + '</li>'
     code_string.replace /ORDERIDENT/g, order_ident.toString()
+
+  get_number_id = (number_line) ->
+    answer = null
+    id_input_id = number_line.children("input:first").attr('id').replace(/\_number/, '_id')
+    if number_line.children("#" + id_input_id).length > 0
+      answer = number_line.children("#" + id_input_id).val()
+    answer
+
+  set_number_remove_action = (jqblock) ->
+    jqblock.find(".rem_phone").click (evnt) ->
+      evnt.preventDefault()
+      number_block = $(this).parent()
+      this_number_id = get_number_id number_block
+      if this_number_id
+        if confirm('Delete phone number?')
+          $.ajax
+            url: 'phones/' + this_number_id
+            type: 'DELETE'
+            data:
+              authenticity_token: $("head meta[name=csrf-token]").attr('content')
+            error: () ->
+              infoshka_manager.show "We can't remove phone number right now - server return error"
+            success: () ->
+              infoshka_manager.show "Number has been removed sucessfully"
+              number_block.remove()
+      else
+        number_block.remove()
+      false
 
   clear = () ->
     cntfrm.find("input#contact_id").val ''
@@ -115,6 +145,7 @@ ContactFormManager = () ->
     cntf_numbs.empty()
     line_item.find(".numbers li").each (indx) ->
       cntf_numbs.append get_number_code(indx, $(this).children(".ident").text(), $(this).children("span").text())
+    set_number_remove_action cntf_numbs
 
   show = () ->
     $("#overshadow").show()
@@ -133,13 +164,14 @@ ContactFormManager = () ->
     cntfrm.find(".addnumber").click (evnt) ->
       evnt.preventDefault()
       cntfrm.find(".numbers").append get_number_code(new Date().getTime())
+      set_number_remove_action cntfrm.find(".numbers li:last")
       false
     cntfrm.find("#contact-form").submit (evnt) ->
       evnt.preventDefault()
       # !!! check (required name, minimum 1 number, required number)
       send()
       false
-    # !!! remove phone
+    
     this
 
   this.openForNew = () ->

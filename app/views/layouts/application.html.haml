@@ -26,6 +26,7 @@
           %ol.numbers
             %li
               %input#contact_phones_attributes_0_number{name: 'contact[phones_attributes][0][number]', type: 'text', placeholder: 'Enter phone number' }
+              %a.rem_phone{href:'#', title: 'Remove phone number'}
               %input#contact_phones_attributes_0_id{name: 'contact[phones_attributes][0][id]', type: 'hidden', value: Time.now.to_i}
           %a.addnumber.the-btn{href:'#', title: 'Add new number'} Add number
           .buttons
