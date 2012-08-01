@@ -94,13 +94,16 @@ ContactFormManager = () ->
       error: (jqXHR, textStatus, errorThrown) ->
       success: (data, textStatus, jqXHR) ->
         infoshka_manager.show "You sucessfully save contact \"" + strip(s_data.contact.name) + "\""
-        # !!! try to update contact data without reload page
-        setTimeout () ->
+        if is_edit
+          line_item = $("#contact_" + data.id)
+          line_item.children(".name").text(data.name)
+          numbers_list = line_item.find(".numbers")
+          numbers_list.empty()
+          $.each data.phones, (indx, val) ->
+            numbers_list.append('<li><p class="ident">' + val.id + '</p><span>' + val.number + '</span></li>')
+        else
           location.reload()
-        ,1200
-        # ---
         close()
-
 
   set_title = (title_text) ->
     cntfrm.find(".title").text title_text
@@ -141,9 +144,9 @@ ContactFormManager = () ->
             type: 'DELETE'
             data:
               authenticity_token: $("head meta[name=csrf-token]").attr('content')
-            error: () ->
+            error: (jqXHR, textStatus, errorThrown) ->
               infoshka_manager.show "We can't remove phone number right now - server return error"
-            success: () ->
+            success: (data, textStatus, jqXHR) ->
               infoshka_manager.show "Number has been removed sucessfully"
               number_block.remove()
               # update list element
@@ -187,6 +190,7 @@ ContactFormManager = () ->
   show = () ->
     $("#overshadow").show()
     cntfrm.show()
+    cntfrm.find("input#contact_name").focus()
 
   close = () ->
     clear()
@@ -202,6 +206,7 @@ ContactFormManager = () ->
       evnt.preventDefault()
       cntfrm.find(".numbers").append get_number_code(new Date().getTime())
       set_number_remove_action cntfrm.find(".numbers li:last")
+      cntfrm.find(".numbers li:last input:first").focus()
       false
     cntfrm.find("#contact-form").submit (evnt) ->
       evnt.preventDefault()

@@ -7,6 +7,14 @@ class Contact < ActiveRecord::Base
 
   validates :name, :presence => true
 
+  def prepare_for_json
+    prepared = {id: id, name: name, phones: []}
+    phones.all.each do |one_phone|
+      prepared[:phones] << {id: one_phone.id, number: one_phone.number}
+    end
+    prepared
+  end
+
   # get all contacts and his phones by one query and collapse it
   def self.get_full_collection
     all_contacts = ActiveRecord::Base.connection.execute('SELECT "contacts".id, "contacts".name, "phones".id as ph_id, "phones".number FROM "contacts" INNER JOIN "phones" ON "phones"."contact_id" = "contacts"."id" ORDER BY "contacts".name')

@@ -28,7 +28,7 @@ class ContactsController < ApplicationController
       if @contact.save
         format.html  { redirect_to(root_url,
                       :notice => 'Contact was successfully created.') }
-        format.json  { head :no_content }
+        format.json  { render :json => @contact.prepare_for_json }
       else
         format.html  { redirect_to(root_url,
                       :notice => 'Error with contact creation.') }
@@ -45,7 +45,7 @@ class ContactsController < ApplicationController
       if @contact.update_attributes(params[:contact])
         format.html  { redirect_to(root_url,
                       :notice => 'Contact was successfully updated.') }
-        format.json  { head :no_content }
+        format.json  { render :json => @contact.prepare_for_json }
       else
         format.html  { redirect_to(root_url,
                       :notice => 'Error with contact updating.') }
