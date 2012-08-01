@@ -1,6 +1,9 @@
 class Contact < ActiveRecord::Base
   has_many :phones
-  attr_accessible :name
+  attr_accessible :name, :phones_attributes
+  accepts_nested_attributes_for :phones
+
+  before_destroy :destroy_phones
 
   # get all contacts and his phones by one query and collapse it
   def self.get_full_collection
@@ -19,6 +22,12 @@ class Contact < ActiveRecord::Base
     end
 
     phlines
+  end
+
+  private
+
+  def destroy_phones
+    phones.destroy_all
   end
 
 

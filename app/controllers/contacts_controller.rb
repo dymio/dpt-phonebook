@@ -65,6 +65,13 @@ class ContactsController < ApplicationController
     end
   end
 
+  def import
+    params[:file].read.split(/[\r\n]{1,2}/).each do |lfline|
+      logger.info "MOTHERFUCKER FILE LINE" + lfline
+    end
+    render :text => "OK"
+  end
+
   private
 
   def rm_tabs chk_string

@@ -18,15 +18,17 @@
     #overshadow
     #cntfrm
       .wrapper
-        %form{name: 'contact-form', action: root_url, method: 'post'}
-          .title New contact
+        %form#contact-form{name: 'contact-form', action: contacts_path, method: 'post'}
+          %p.title New contact
+          %input#contact_id{name: 'contact[id]', type: 'hidden', value: Time.now.to_i}
           .name
-            %input{name: 'contact[name]', type: 'text', placeholder: 'Enter name'}
+            %input#contact_name{name: 'contact[name]', type: 'text', placeholder: 'Enter name'}
           %ol.numbers
             %li
-              %input{name: 'contact[phones_attributes][0][number]', type: 'text', placeholder: 'Enter phone number' }
-              %input{name: 'contact[phones_attributes][0][id]', type: 'hidden', value: '0'}
+              %input#contact_phones_attributes_0_number{name: 'contact[phones_attributes][0][number]', type: 'text', placeholder: 'Enter phone number' }
+              %input#contact_phones_attributes_0_id{name: 'contact[phones_attributes][0][id]', type: 'hidden', value: Time.now.to_i}
           %a.addnumber.the-btn{href:'#', title: 'Add new number'} Add number
           .buttons
             %input.the-btn{type: 'submit', value: 'Save'}
+            %a.close.the-btn{href: '#', title: 'Close form'} Cancel
 

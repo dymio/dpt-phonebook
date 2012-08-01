@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require html5shiv
+//= require plupload.full
 //= require script
 //- require_tree .

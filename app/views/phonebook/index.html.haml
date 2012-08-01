@@ -1,7 +1,21 @@
 %aside
-  .actions
+  .actions#actions
     %a#new-contact.the-btn{href:'#', title:'Add new contact'} New contact
     %a.the-btn{href:contacts_path(format: 'tsv'), title:'Download as TSV file', target: '_blank'} Download .tsv
+    %p.import= link_to 'import data from .tsv', contacts_import_path, :id => 'import-file'
+
+-# %ul
+-#   - Contact.order(:name).each do |pl|
+-#     %li
+-#       %span{style:'font-weight:bold'}= pl[:name]
+-#       - pl.phones.each do |plph|
+-#         = plph.number
+-#
+-# With 2441 contact and 3255 phones:
+-# commented code works:
+-#   2308ms (Views: 1992.2ms | ActiveRecord: 316.0ms)
+-# with one query variant (after this comment):
+-#   254ms (Views: 214.4ms | ActiveRecord: 34.4ms)
 
 %ul.phlines
   - current_letter = nil
@@ -11,26 +25,13 @@
       %li.letter
         %a{name:'start_of_' + current_letter}= current_letter
     %li
-      .ident= pl[:id]
+      %p.ident= pl[:id]
       %p.name= pl[:name]
       %ol.numbers
         - pl[:phones].each do |plph|
           %li
-            .ident= plph[:id]
-            = plph[:number]
+            %p.ident= plph[:id]
+            %span= plph[:number]
       .fast_btn
-        %a.edt_btn{href:'#', title:'Edit contact'}
-        %a.rmv_btn{href:'#', title:'Remove contact'}
-
--# With 2441 contact and 3255 phones:
--# commented code takes:
--#   2308ms (Views: 1992.2ms | ActiveRecord: 316.0ms)
--# with one query variant (Contact.get_full_collection):
--#   254ms (Views: 214.4ms | ActiveRecord: 34.4ms)
--#
--# %ul
--#   - Contact.order(:name).each do |pl|
--#     %li
--#       %span{style:'font-weight:bold'}= pl[:name]
--#       - pl.phones.each do |plph|
--#         = plph.number
+        %a.edt_btn{href: contact_path(pl[:id]), title:'Edit contact'}
+        %a.rmv_btn{href: contact_path(pl[:id]), title:'Remove contact'}
