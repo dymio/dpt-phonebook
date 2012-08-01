@@ -126,6 +126,15 @@ ContactFormManager = () ->
       number_block = $(this).parent()
       this_number_id = get_number_id number_block
       if this_number_id
+
+        exists_numbers_count = 0
+        cntfrm.find(".numbers li").each (indx) ->
+          exists_numbers_count += 1 if get_number_id($(this)) != null
+
+        if exists_numbers_count < 2
+          infoshka_manager.show "Sorry, you can't remove last exist phone number"
+          return false
+
         if confirm('Delete phone number?')
           $.ajax
             url: 'phones/' + this_number_id
@@ -137,6 +146,12 @@ ContactFormManager = () ->
             success: () ->
               infoshka_manager.show "Number has been removed sucessfully"
               number_block.remove()
+              # update list element
+              list_elem = $("#contact_" + cntfrm.find("input#contact_id").val())
+              list_elem.find(".numbers .ident").each (indx) ->
+                $(this).parent().remove() if $(this).text() == this_number_id
+              
+
       else
         number_block.remove()
       false
@@ -220,10 +235,17 @@ $(document).ready () ->
     evnt.preventDefault()
     cf_mgr.openForNew()
     false
+
+  $("#content .phlines > li").click (evnt) ->
+    $(this).toggleClass 'active'
+
+  # edit contact
   $(".phlines .edt_btn").click (evnt) ->
     evnt.preventDefault()
     cf_mgr.openForEdit $(this).closest(".phlines > li")
     false
+
+  # remove contact
   $(".phlines .rmv_btn").click (evnt) ->
     evnt.preventDefault()
     line_item = $(this).closest(".phlines > li")
@@ -235,10 +257,14 @@ $(document).ready () ->
         data:
           authenticity_token: $("head meta[name=csrf-token]").attr('content')
         error: () ->
-          infoshka_manager.show "We can't remove " + contact_name + " right now - server return error"
+          infoshka_manager.show "We can't remove " + strip(contact_name) + " right now - server return error"
         success: () ->
-          infoshka_manager.show "Contact " + contact_name + " removed sucessfully"
+          infoshka_manager.show "Contact " + strip(contact_name) + " removed sucessfully"
+          prev_item = line_item.prev()
           line_item.remove()
+          if prev_item.hasClass 'letter'
+            prev_item.remove() if (prev_item.next().length == 0) || (prev_item.next().hasClass('letter'))
+
     false
   if $('#import-file').length
     new PluploadUploaderInit

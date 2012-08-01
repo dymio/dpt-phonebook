@@ -133,6 +133,7 @@ header h1 { margin-left: 56px; height: 48px; line-height: 48px; font-size: 48px;
 #content .phlines ol.numbers li { padding: 1px 0 2px 18px; height: 20px; line-height: 20px; background: url('telephone.png') no-repeat left 3px; }
 #content .phlines > li .fast_btn { display: none; position: absolute; top: 12px; left: 248px; width: 36px; height: 14px; }
 #content .phlines > li:hover .fast_btn { display: block; }
+#content .phlines > li.active .fast_btn { display: block; }
 #content .phlines .fast_btn a { display: block; overflow: hidden; float: left; margin-right: 4px; width: 14px; height: 14px; cursor: pointer; background: url(fast_btns.png) no-repeat left top; }
 #content .phlines .fast_btn .edt_btn { background-position: left top; }
 #content .phlines .fast_btn .edt_btn:hover { background-position: left -14px; }
