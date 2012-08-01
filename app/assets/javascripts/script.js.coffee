@@ -1,3 +1,22 @@
+InfoshkaManager = () ->
+  tmr = null
+
+  this.show = (inf_message) ->
+    $("#infoshka").html('<p>' + inf_message + '</p>')
+    $("#infoshka").fadeIn 400
+    clearTimeout(tmr) if tmr
+    tmr = setTimeout () ->
+      $("#infoshka").fadeOut 400
+      tmr = null
+    ,4800
+
+  this
+
+infoshka_manager = new InfoshkaManager()
+
+# ====================================== #
+# ====================================== #
+
 PluploadUploaderInit = () ->
   uploader = new plupload.Uploader
     runtimes : 'gears,html5,flash,silverlight,browserplus'
@@ -19,20 +38,15 @@ PluploadUploaderInit = () ->
     $('#import-file').next().text ': ' + file.percent + '%'
 
   uploader.bind 'Error', (up, err) ->
-    # !!! information message
-    alert err.message
+    infoshka_manager.show "Error with file upload: " + err.message
     up.refresh() # Reposition Flash/Silverlight
-
-    # $('#filelist').append "<div>Error: " + err.code +
-    #   ", Message: " + err.message +
-    #   (err.file ? ", File: " + err.file.name : "") +
-    #   "</div>"
 
   uploader.bind 'FileUploaded', (up, file) ->
     $('#import-file').next().remove()
-    # !!! info message
-    alert "File uploaded"
-    location.reload()
+    infoshka_manager.show "File sucessfully uploaded"
+    setTimeout () ->
+      location.reload()
+    ,1000
 
 # ====================================== #
 # ====================================== #
@@ -72,8 +86,9 @@ ContactFormManager = () ->
       error: (jqXHR, textStatus, errorThrown) ->
       success: (data, textStatus, jqXHR) ->
         # !!! load to list
-        location.reload()
+        #location.reload()
         # ---
+        infoshka_manager.show "You sucessfully save contact"
         close()
 
 
@@ -158,15 +173,17 @@ $(document).ready () ->
   $(".phlines .rmv_btn").click (evnt) ->
     evnt.preventDefault()
     line_item = $(this).closest(".phlines > li")
-    if confirm('Delete contact "' + line_item.children(".name").text() + '". Are you sure?')
+    contact_name = line_item.children(".name").text()
+    if confirm('Delete contact "' + contact_name + '". Are you sure?')
       $.ajax
         url: $(this).attr("href")
         type: 'DELETE'
         data:
           authenticity_token: $("head meta[name=csrf-token]").attr('content')
         error: () ->
+          infoshka_manager.show "We can't remove " + contact_name + " right now - server return error"
         success: () ->
-          # !!! show info window
+          infoshka_manager.show "Contact " + contact_name + " removed sucessfully"
           line_item.remove()
     false
   if $('#import-file').length

@@ -169,7 +169,25 @@ header h1 { margin-left: 56px; height: 48px; line-height: 48px; font-size: 48px;
 #cntfrm .buttons { overflow: hidden; margin-top: 28px; }
 #cntfrm .buttons .the-btn { float: left; margin-right: 8px; padding: 0 12px; width: auto; height: 36px; line-height: 36px; font-size: 16px; cursor: pointer; }
 
-
+#infoshka {
+  display: none;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  position: fixed;
+  top: 18px;
+  right: 42px;
+  z-index: 997;
+  padding: 12px 18px;
+  max-width: 242px;
+  background: #000;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  color: #fff;
+}
 
 
 
