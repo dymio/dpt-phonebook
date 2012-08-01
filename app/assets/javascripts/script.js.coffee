@@ -14,7 +14,13 @@ InfoshkaManager = () ->
 
 infoshka_manager = new InfoshkaManager()
 
-# !!! security questions
+# security questions
+strip = (html) ->
+  tmp = document.createElement "DIV"
+  tmp.innerHTML = html
+  answer = tmp.textContent||tmp.innerText
+  $(tmp).remove()
+  answer
 
 # ====================================== #
 # ====================================== #
@@ -48,7 +54,7 @@ PluploadUploaderInit = () ->
     infoshka_manager.show "File sucessfully uploaded"
     setTimeout () ->
       location.reload()
-    ,1000
+    ,1200
 
 # ====================================== #
 # ====================================== #
@@ -87,10 +93,12 @@ ContactFormManager = () ->
       data: s_data
       error: (jqXHR, textStatus, errorThrown) ->
       success: (data, textStatus, jqXHR) ->
+        infoshka_manager.show "You sucessfully save contact \"" + strip(s_data.contact.name) + "\""
         # !!! try to update contact data without reload page
-        location.reload()
+        setTimeout () ->
+          location.reload()
+        ,1200
         # ---
-        infoshka_manager.show "You sucessfully save contact \"" + s_data.contact.name + "\""
         close()
 
 
@@ -133,6 +141,20 @@ ContactFormManager = () ->
         number_block.remove()
       false
 
+  check = () ->
+    error_msg = ""
+    error_msg += "<br /> - Empty contact name field" if cntfrm.find("input#contact_name").val() == ""
+    if cntfrm.find(".numbers li").length < 1
+      error_msg += "<br /> - Contact can't exist without phone numbers"
+    else
+      numbers_miss = 0
+      cntfrm.find(".numbers li").each (indx) ->
+        numbers_miss += 1 if $(this).children("input:first").val() == ""
+      error_msg += "<br /> - Have " + numbers_miss + " empty phones numbers fields" if numbers_miss > 0
+    error_msg = "Have some errors in contact form:" + error_msg if error_msg != ""
+    infoshka_manager.show error_msg
+    error_msg == ""
+
   clear = () ->
     cntfrm.find("input#contact_id").val ''
     cntfrm.find("input#contact_name").val ''
@@ -168,8 +190,8 @@ ContactFormManager = () ->
       false
     cntfrm.find("#contact-form").submit (evnt) ->
       evnt.preventDefault()
-      # !!! check (required name, minimum 1 number, required number)
-      send()
+      if check()
+        send()
       false
     
     this

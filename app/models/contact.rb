@@ -5,6 +5,8 @@ class Contact < ActiveRecord::Base
 
   before_destroy :destroy_phones
 
+  validates :name, :presence => true
+
   # get all contacts and his phones by one query and collapse it
   def self.get_full_collection
     all_contacts = ActiveRecord::Base.connection.execute('SELECT "contacts".id, "contacts".name, "phones".id as ph_id, "phones".number FROM "contacts" INNER JOIN "phones" ON "phones"."contact_id" = "contacts"."id" ORDER BY "contacts".name')
