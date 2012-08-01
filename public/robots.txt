@@ -23,7 +23,7 @@
 User-agent: Yandex
 Disallow: /assets/
 Allow: /
-#Host: example.com
+Host: still-shelf-4969.herokuapp.com
 
 User-agent: Googlebot
 Disallow: /assets/
@@ -32,5 +32,3 @@ Allow: /
 User-agent: *
 Disallow: /assets/
 Disallow:
-
-#Sitemap: http://badhat.ru/sitemap.xml
