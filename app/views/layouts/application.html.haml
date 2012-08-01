@@ -1,0 +1,32 @@
+!!!
+%html{:lang => "en-EN"}
+  %head
+    %meta{:charset => "utf-8"}
+    %title DP T Phonebook
+    %link{:href => "favicon.ico", :rel => "icon", :type => "image/vnd.microsoft.icon"}
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    #wrapper
+      %header
+        = image_tag "logo.png", :class => 'logo'
+        %h1 DP T Phonebook
+      %section#content
+        = yield
+    %footer
+    #overshadow
+    #cntfrm
+      .wrapper
+        %form{name: 'contact-form', action: root_url, method: 'post'}
+          .title New contact
+          .name
+            %input{name: 'contact[name]', type: 'text', placeholder: 'Enter name'}
+          %ol.numbers
+            %li
+              %input{name: 'contact[phones_attributes][0][number]', type: 'text', placeholder: 'Enter phone number' }
+              %input{name: 'contact[phones_attributes][0][id]', type: 'hidden', value: '0'}
+          %a.addnumber.the-btn{href:'#', title: 'Add new number'} Add number
+          .buttons
+            %input.the-btn{type: 'submit', value: 'Save'}
+

@@ -1,0 +1,179 @@
+/* -----------------------------
+ ----------- RESET CSS ---------
+ ------------------------------- */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* -----------------------------
+ ------ END OF RESET CSS -------
+ ------------------------------- */
+
+ /* FOOTER FUNCTIONAL */
+html, body { width: 100%; height: 100%; }
+
+#wrapper {
+  overflow: hidden;
+  position: relative;
+  min-height: 100%;
+  height:auto !important;
+  height:100%;
+}
+#content {
+  padding-bottom: 60px;
+}
+footer {
+  overflow: hidden;
+  position: relative;
+  height: 12px;
+  margin-top: -12px;
+}
+/* END OF FOOTER FUNCTIONAL */
+
+body {
+  background: #fff;
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 14px;
+  color: #000;
+}
+
+.the-btn {
+  display: block;
+  border: none;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  margin: 0;
+  padding: 0;
+  width: 128px;
+  height: 28px;
+  line-height: 28px;
+  background: #693E05;
+  text-decoration: none;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+}
+.the-btn:hover { color: #e3d241; }
+
+header { margin: auto; padding: 24px 0; max-width: 754px; min-width: 514px; }
+header .logo { float: left; }
+header h1 { margin-left: 56px; height: 48px; line-height: 48px; font-size: 48px; font-weight: bold; color: #e3d241; }
+
+/* footer { margin: -12px auto 0; max-width: 754px; min-width: 514px; background: #e3d241; } */
+
+#content { overflow: hidden; margin: auto; max-width: 754px; min-width: 514px; }
+
+#content aside { float: right; width: 196px; padding-top: 14px; }
+#content aside .actions {}
+#content aside .actions .the-btn {
+  margin-bottom: 8px;
+  width: 186px;
+  height: 42px;
+  line-height: 42px;
+  font-size: 16px;
+}
+
+
+#content .phlines { float: left; width: 514px; }
+#content .phlines > li { position: relative; overflow: hidden; padding: 8px 0 8px 18px; background: #FAF3DE; }
+#content .phlines > li:nth-child(odd) { background: #fafafa; }
+#content .phlines > li.letter { margin-top: 14px; padding: 4px 0 4px 18px; background: #693E05; }
+#content .phlines > li.letter a { font-size: 16px; font-weight: bold; color: #fff; text-decoration: none; }
+#content .phlines .ident { display: none; }
+#content .phlines .name { float: left; padding-right: 40px; width: 224px; font-size: 18px; font-weight: bold; }
+#content .phlines ol.numbers { margin-left: 264px; }
+#content .phlines ol.numbers li { padding: 1px 0 2px 18px; height: 20px; line-height: 20px; background: url('telephone.png') no-repeat left 3px; }
+#content .phlines > li .fast_btn { display: none; position: absolute; top: 12px; left: 248px; width: 36px; height: 14px; }
+#content .phlines > li:hover .fast_btn { display: block; }
+#content .phlines .fast_btn a { display: block; overflow: hidden; float: left; margin-right: 4px; width: 14px; height: 14px; cursor: pointer; background: url(fast_btns.png) no-repeat left top; }
+#content .phlines .fast_btn .edt_btn { background-position: left top; }
+#content .phlines .fast_btn .edt_btn:hover { background-position: left -14px; }
+#content .phlines .fast_btn .rmv_btn { background-position: -14px top; }
+#content .phlines .fast_btn .rmv_btn:hover { background-position: -14px -14px; }
+
+#overshadow {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(overlay-back.png) repeat left top;
+  z-index: 998;
+}
+
+#cntfrm {
+  display: none;
+  position: fixed;
+  top: 20%;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+#cntfrm .wrapper { overflow: hidden; margin: auto; padding: 24px; width: 466px; background: #fff; }
+#cntfrm .title { margin-bottom: 12px; padding: 4px 14px 8px; background: #693E05; font-size: 18px; font-weight: bold; color: #fff; }
+#cntfrm .name { float: left; width: 220px;}
+#cntfrm .name input { width: 214px; height: 22px; font-size: 18px; font-weight: bold; }
+#cntfrm .numbers { margin-left: 236px; }
+#cntfrm .numbers li { padding-left: 18px; background: url('telephone.png') no-repeat left 3px; }
+#cntfrm .numbers input { width: 206px; height: 18px; font-size: 14px; }
+#cntfrm a.addnumber { margin: 8px 0 0 254px; }
+#cntfrm .buttons {}
+#cntfrm .buttons input { width: 86px; height: 36px; line-height: 36px; font-size: 16px; cursor: pointer; }
+
+
+
+
+
+
+
+
+
+
