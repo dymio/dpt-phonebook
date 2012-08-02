@@ -128,7 +128,7 @@ header h1 { margin-left: 56px; height: 48px; line-height: 48px; font-size: 48px;
 #content .phlines > li.letter { margin-top: 14px; padding: 4px 0 4px 18px; background: #693E05; }
 #content .phlines > li.letter a { font-size: 16px; font-weight: bold; color: #fff; text-decoration: none; }
 #content .phlines .ident { display: none; }
-#content .phlines .name { overflow: hidden; float: left; padding-right: 40px; width: 224px; font-size: 18px; font-weight: bold; }
+#content .phlines .name { overflow: hidden; float: left; padding-right: 40px; padding-bottom: 2px; width: 224px; font-size: 18px; font-weight: bold; }
 #content .phlines ol.numbers { margin-left: 264px; }
 #content .phlines ol.numbers li { padding: 1px 0 2px 18px; height: 20px; line-height: 20px; background: url('telephone.png') no-repeat left 3px; }
 #content .phlines > li .fast_btn { display: none; position: absolute; top: 12px; left: 248px; width: 36px; height: 14px; }

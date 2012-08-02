@@ -1,9 +1,9 @@
 class Contact < ActiveRecord::Base
-  has_many :phones
-  attr_accessible :name, :phones_attributes
+  has_many :phones, :dependent => :destroy
+
   accepts_nested_attributes_for :phones
 
-  before_destroy :destroy_phones
+  attr_accessible :name, :phones_attributes
 
   validates :name, :presence => true
 
@@ -33,12 +33,5 @@ class Contact < ActiveRecord::Base
 
     phlines
   end
-
-  private
-
-  def destroy_phones
-    phones.destroy_all
-  end
-
 
 end
