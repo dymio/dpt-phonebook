@@ -9,9 +9,9 @@ class ContactsController < ApplicationController
     #  format.tsv {
         tsv_text = ""
         phlines.each do |pl|
-          tsv_line = rm_tabs pl[:name]
-          pl[:phones].each do |plph|
-            tsv_line += "\t" + rm_tabs(plph[:number])
+          tsv_line = rm_tabs pl.name
+          pl.phones.each do |plph|
+            tsv_line += "\t" + rm_tabs(plph.number)
           end
           tsv_text += tsv_line + "\r\n"
         end

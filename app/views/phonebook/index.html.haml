@@ -20,18 +20,18 @@
 %ul.phlines
   - current_letter = nil
   - @phlines.each do |pl|
-    - unless current_letter == pl[:name][0].upcase
-      - current_letter = pl[:name][0].upcase
+    - unless current_letter == pl.name[0].upcase
+      - current_letter = pl.name[0].upcase
       %li.letter
         %a{name:'start_of_' + current_letter}= current_letter
-    %li{id: 'contact_' + pl[:id].to_s}
-      %p.ident= pl[:id]
-      %p.name= pl[:name]
+    %li{id: 'contact_' + pl.id.to_s}
+      %p.ident= pl.id
+      %p.name= pl.name
       %ol.numbers
-        - pl[:phones].each do |plph|
+        - pl.phones.each do |plph|
           %li
-            %p.ident= plph[:id]
-            %span= plph[:number]
+            %p.ident= plph.id
+            %span= plph.number
       .fast_btn
-        %a.edt_btn{href: contact_path(pl[:id]), title:'Edit contact'}
-        %a.rmv_btn{href: contact_path(pl[:id]), title:'Remove contact'}
+        %a.edt_btn{href: contact_path(pl.id), title:'Edit contact'}
+        %a.rmv_btn{href: contact_path(pl.id), title:'Remove contact'}
