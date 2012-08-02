@@ -7,15 +7,17 @@ class ContactsController < ApplicationController
 
     #respond_to do |format|
     #  format.tsv {
-        tsv_text = ""
-        phlines.each do |pl|
-          tsv_line = rm_tabs pl.name
-          pl.phones.each do |plph|
-            tsv_line += "\t" + rm_tabs(plph.number)
-          end
-          tsv_text += tsv_line + "\r\n"
-        end
-        render :text => tsv_text
+
+    tsv_text = ""
+    phlines.each do |pl|
+      tsv_line = rm_tabs pl.name
+      pl.phones.each do |plph|
+        tsv_line += "\t" + rm_tabs(plph.number)
+      end
+      tsv_text += tsv_line + "\r\n"
+    end
+    render :text => tsv_text
+
     #  }
     #  format.html { redirect_to(root_url) }
     #end
@@ -69,6 +71,7 @@ class ContactsController < ApplicationController
     import_counter = { lines_accepted: 0, added_contacts: 0, added_phones: 0, renamed_contacts: 0, removed_contacts: 0, removed_phones: 0 }
 
     import_file_lines = params[:file].read.split(/[\r\n]+/)
+
     import_file_lines.each do |ifline|
       line_elements = ifline.split(/[\t]+/)
       next if line_elements.length < 2
@@ -85,14 +88,14 @@ class ContactsController < ApplicationController
       end
     end
 
-    # !!! show report for customer
-    # reports = "Import results:\r\n"
-    # reports << "Processed " + import_counter[:lines_accepted].to_s + " lines of " + import_file_lines.length.to_s + "\r\n"
-    # reports << "Added contacts: " + import_counter[:added_contacts].to_s + "\r\n"
-    # reports << "Added phones numbers: " + import_counter[:added_phones].to_s + "\r\n"
-    # reports << "Renamed contacts: " + import_counter[:renamed_contacts].to_s + "\r\n"
-    # reports << "Removed contacts: " + import_counter[:removed_contacts].to_s + "\r\n"
-    # reports << "Removed phones numbers: " + import_counter[:removed_phones].to_s + "\r\n"
+    ## !!! show report for customer
+    ## reports = "Import results:\r\n"
+    ## reports << "Processed " + import_counter[:lines_accepted].to_s + " lines of " + import_file_lines.length.to_s + "\r\n"
+    ## reports << "Added contacts: " + import_counter[:added_contacts].to_s + "\r\n"
+    ## reports << "Added phones numbers: " + import_counter[:added_phones].to_s + "\r\n"
+    ## reports << "Renamed contacts: " + import_counter[:renamed_contacts].to_s + "\r\n"
+    ## reports << "Removed contacts: " + import_counter[:removed_contacts].to_s + "\r\n"
+    ## reports << "Removed phones numbers: " + import_counter[:removed_phones].to_s + "\r\n"
 
     logger.info "Import results:"
     logger.info "Processed " + import_counter[:lines_accepted].to_s + " lines of " + import_file_lines.length.to_s
