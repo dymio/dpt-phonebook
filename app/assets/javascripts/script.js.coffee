@@ -177,6 +177,8 @@ ContactFormManager = () ->
     cntfrm.find("input#contact_id").val ''
     cntfrm.find("input#contact_name").val ''
     cntfrm.find(".numbers").empty()
+    cntfrm.find(".numbers").append get_number_code(new Date().getTime())
+    set_number_remove_action cntfrm.find(".numbers")
 
   load = (line_item) ->
     cntfrm.find("input#contact_id").val line_item.children(".ident").text()
